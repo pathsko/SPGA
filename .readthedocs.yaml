@@ -20,33 +20,15 @@ SEARCH_SPACE = (0, 12.55)  # Search space boundaries
 POPULATION_SIZE = 100
 NUM_ITERATIONS = 100
 
-def population_generator(args):
-    """
-    Generates initial population with random solutions within search space.
-    
-    Parameters:
-        args (dict): Algorithm parameters containing:
-            - population_size (int): Number of individuals in population
-            
-    Returns:
-        list[Solution]: List of Solution objects with random values
-    """
+def population_generator(**kwargs):
+
     return [Solution(
         solution=[random.uniform(*SEARCH_SPACE)],
         fitness=None
-    ) for _ in range(args['population_size'])]
+    ) for _ in range(kwargs['population_size'])]
 
-def evaluate_fitness(individual, args):
-    """
-    Evaluates fitness of an individual solution.
-    
-    Parameters:
-        individual (Solution): Solution to evaluate
-        args (dict): Additional parameters (unused in this case)
-        
-    Returns:
-        float: Fitness value (0 for invalid solutions, sin(x)*x² otherwise)
-    """
+def evaluate_fitness(individual, **kwargs):
+
     x = individual.solution[0]
     if x > SEARCH_SPACE[1] or x < SEARCH_SPACE[0]:
         return 0
@@ -57,6 +39,7 @@ ga_args = {
     'population_size': POPULATION_SIZE,
     'num_iterations': NUM_ITERATIONS,
     'optimization': 'max',  # Optimization direction
+    'tournament_size': 3,  # Number of individuals in tournament
     'mutation_probability': 0.15,  # Probability of mutation
     'crossover_probability': 0.8,    # Probability of crossover (disabled here)
     'max_its_with_enhancing': 20  # Max iterations without improvement
