@@ -18,5 +18,4 @@ python:
         - docs
 
 formats:
-  - pdf
-  - html  # Este es el formato principal que ya generas con tus Makefile/make.bat
+  - html  
