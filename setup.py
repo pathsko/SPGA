@@ -31,6 +31,10 @@ setup(
         "dev": [
             "pytest>=6.0",
             "ipython>=7.0",
+            'sphinx',
+            'sphinx-rtd-theme',
+            'numpydoc',  # Recomendado para documentación científica
+            'myst-parser',  # Para soportar Markdown
         ],
     },
 )
