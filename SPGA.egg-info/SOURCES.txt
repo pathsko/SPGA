@@ -1,0 +1,14 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+SPGA.egg-info/PKG-INFO
+SPGA.egg-info/SOURCES.txt
+SPGA.egg-info/dependency_links.txt
+SPGA.egg-info/requires.txt
+SPGA.egg-info/top_level.txt
+spga/__init__.py
+spga/core.py
+spga/operators.py
+spga/types.py
+spga/utils.py

@@ -1,0 +1,21 @@
+Metadata-Version: 2.1
+Name: SPGA
+Version: 0.1.0
+Summary: Una librería flexible para implementar algoritmos genéticos
+Home-page: https://https://github.com/pathsko/SGA
+Author: Pedro Velasco
+Author-email: p2003ve@gmail.com
+License: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Intended Audience :: Science/Research
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+Provides-Extra: dev
+License-File: LICENSE
+
+# SPGA
+

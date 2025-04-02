@@ -25,6 +25,7 @@ setup(
         "numpy>=1.18.0",
         "matplotlib>=3.0.0",
         "Pillow>=8.0.0",
+        "IPython>=7.0.0",
     ],
     extras_require={
         "dev": [
