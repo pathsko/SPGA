@@ -23,7 +23,7 @@ Key Features:
    installation
    usage
    examples
-   modules
+   api
 
 Indices and Tables
 ==================
