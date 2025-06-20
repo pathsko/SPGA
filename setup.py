@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="SPGA",  
-    version="0.1.1", 
+    version="0.1.2", 
     author="Pedro Velasco",
     author_email="p2003ve@gmail.com",
     description="Una librería flexible para implementar algoritmos genéticos",

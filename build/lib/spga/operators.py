@@ -4,8 +4,7 @@ from typing import List, Callable
 from .types import Solution
 
 def tournament_selection(population: List[Solution], 
-                        tournament_size: int = 3, 
-                        optimization: str = 'max') -> Solution:
+                        **kargs) -> Solution:
     """
     Tournament selection with support for maximization/minimization
     
@@ -17,6 +16,8 @@ def tournament_selection(population: List[Solution],
     Returns:
         List[Solution]: New population after selection
     """
+    optimization = kargs['optimization']
+    tournament_size = kargs.get('tournament_size', 3)
     new_population = []
     for _ in range(len(population)):
         tournament = random.sample(population, tournament_size)
@@ -139,7 +140,7 @@ def create_genetic_operations(
     """
     def genetic_operations(population: List[Solution], 
                           elite: Solution, 
-                          args: dict) -> List[Solution]:
+                          **kwargs: dict) -> List[Solution]:
         """
         Executes genetic operations pipeline
         
@@ -155,24 +156,25 @@ def create_genetic_operations(
         Returns:
             List[Solution]: New generation of solutions
         """
-        new_population = selection_func(population, optimization=args['optimization'])
-        pop_size = args['population_size']
+
+        new_population = selection_func(population, **kwargs)
+        pop_size = kwargs['population_size']
 
         # Crossover
         for i in range(0, pop_size, 2):
-            if random.randint(0, 100) < args.get('crossover_probability',0.8):
+            if random.randint(0, 100) < kwargs.get('crossover_probability',0.8):
                 parent1 = new_population[i]
                 parent2 = new_population[i + 1] if i + 1 < pop_size else new_population[i]
                 
-                child1, child2 = crossover_func(parent1, parent2, **args) 
+                child1, child2 = crossover_func(parent1, parent2, **kwargs) 
                 new_population[i] = child1
                 if i + 1 < pop_size:
                     new_population[i + 1] = child2
             
         # Mutation
         for i in range(len(new_population)):
-            if random.random() < args.get('mutation_probability', 0.1):
-                child = mutation_func(new_population[i], **args)
+            if random.random() < kwargs.get('mutation_probability', 0.1):
+                child = mutation_func(new_population[i], **kwargs)
                 new_population[i] = child
         
         return new_population[:pop_size]  # Ensure correct population size

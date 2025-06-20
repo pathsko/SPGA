@@ -140,7 +140,7 @@ def genetic_algorithm(
             raise ValueError("Optimization type must be 'max' or 'min'.")
 
     # Generate initial population
-    population = population_generator(args)
+    population = population_generator(**args)
 
     # Evaluate the fitness of each individual in the population
     fit_means = []
@@ -148,7 +148,7 @@ def genetic_algorithm(
     elite_fitnesses = []
 
     for individual in population:
-        individual.fitness = evaluate_fitness(individual, args)
+        individual.fitness = evaluate_fitness(individual, **args)
 
     # Get the elite (best individual) from the initial population
     elite = deepcopy(get_best(population, lambda x: x.fitness, args))
@@ -165,13 +165,13 @@ def genetic_algorithm(
             print(f"Best fitness: {elite.fitness}")
 
         # Apply genetic operations to generate the new population
-        population = genetic_operations(population, elite, args)
+        population = genetic_operations(population, elite, **args)
 
         # Evaluate the fitness of modified individuals
         for individual in population:
             if individual.modified:
                 individual.modified = False
-                individual.fitness = evaluate_fitness(individual, args)
+                individual.fitness = evaluate_fitness(individual, **args)
 
         # Update the elite individual
         elite_fit = elite.fitness
@@ -187,6 +187,7 @@ def genetic_algorithm(
         if elite.fitness == elite_fit:
           its_with_enhancing += 1
         else:
+          
           its_with_enhancing = 0
         if its_with_enhancing == max_its_with_enhancing:
           break

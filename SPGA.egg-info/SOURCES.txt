@@ -1,5 +1,6 @@
 LICENSE
 README.md
+README.rst
 pyproject.toml
 setup.py
 SPGA.egg-info/PKG-INFO

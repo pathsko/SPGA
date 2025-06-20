@@ -6,3 +6,7 @@ IPython>=7.0.0
 [dev]
 pytest>=6.0
 ipython>=7.0
+sphinx
+sphinx-rtd-theme
+numpydoc
+myst-parser
