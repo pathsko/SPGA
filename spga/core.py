@@ -187,7 +187,7 @@ def genetic_algorithm(
         if elite.fitness == elite_fit:
           its_with_enhancing += 1
         else:
-          print('MEJORA')
+          
           its_with_enhancing = 0
         if its_with_enhancing == max_its_with_enhancing:
           break
