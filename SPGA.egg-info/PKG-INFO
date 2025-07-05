@@ -1,4 +1,4 @@
-Metadata-Version: 2.1
+Metadata-Version: 2.4
 Name: SPGA
 Version: 0.1.2
 Summary: Una librería flexible para implementar algoritmos genéticos
@@ -24,6 +24,17 @@ Requires-Dist: sphinx; extra == "dev"
 Requires-Dist: sphinx-rtd-theme; extra == "dev"
 Requires-Dist: numpydoc; extra == "dev"
 Requires-Dist: myst-parser; extra == "dev"
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: provides-extra
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
 
 # SPGA: Simple and Personalizable Genetic Algorithm
 

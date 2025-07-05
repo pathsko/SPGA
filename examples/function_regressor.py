@@ -6,6 +6,7 @@ Objective: Maximize the function f(x) = sin(x) * x^2 in the interval [0, 12.55]
 import math
 import random
 import numpy as np
+from copy import deepcopy
 from spga import (
     genetic_algorithm,
     Solution,
@@ -79,7 +80,7 @@ def custom_tournament(population, **kargs):
             best = max(tournament, key=lambda x: x.fitness)
         else:
             best = min(tournament, key=lambda x: x.fitness)
-        new_population.append(best)
+        new_population.append(deepcopy(best))
     return new_population
 
 #Custom crossover function
@@ -119,7 +120,7 @@ ga_args = {
     'num_iterations': NUM_ITERATIONS,
     'optimization': 'min',  # Optimization direction
     'tournament_size': 3,  # Number of individuals in tournament
-    'mutation_probability': 0.15,  # Probability of mutation
+    'mutation_probability': 0.2,  # Probability of mutation
     'crossover_probability': 0.6,    # Probability of crossover (disabled here)
     'max_its_with_enhancing': 100,  # Max iterations without improvement
     'data': data
@@ -130,8 +131,8 @@ result = genetic_algorithm(
     evaluate_fitness=evaluate_fitness,
     genetic_operations=genetic_operations,
     args=ga_args,
-    verbose=True,
-    plot=True
+    verbose=False,
+    plot=False
 )
 
 # 6. Results output
@@ -139,3 +140,4 @@ print("\n--- FINAL RESULTS ---")
 print(f"Best solution found: {result.best_solution}")
 print(f"Function value: f(x) = {result.best_fitness:.4f}")
 
+print(evaluate_fitness(Solution(solution=result.best_solution),data=data))

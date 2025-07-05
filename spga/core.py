@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from IPython import get_ipython
 from PIL import Image
+from collections import Counter
 
 def plot_with_std(x, means, std_devs, elite_fitness, log=False):
     """
@@ -90,7 +91,8 @@ def genetic_algorithm(
     genetic_operations,
     args,
     verbose=False,
-    plot=False
+    plot=False,
+    checks=False
 ) -> GeneticAlgorithmResult:
     """
     Core genetic algorithm implementation with elitism and early stopping.
@@ -114,6 +116,9 @@ def genetic_algorithm(
             Whether to print progress information
         plot (bool): 
             Whether to generate fitness progression plot
+        checks (bool):
+            Enables additional checks to ensure no duplicate solutions in the population. 
+            Note: Activating this option may increase computational time due to the extra validations performed.
             
     Returns:
         GeneticAlgorithmResult: 
@@ -152,8 +157,8 @@ def genetic_algorithm(
 
     # Get the elite (best individual) from the initial population
     elite = deepcopy(get_best(population, lambda x: x.fitness, args))
-
     iteration = 0
+
     # Main loop of the genetic algorithm
     while iteration < args['num_iterations'] and not (
         args.get('early_stop', False) and
@@ -162,7 +167,14 @@ def genetic_algorithm(
     ):
         if verbose:
             print(f"Iteration {iteration + 1}")
+            print(f"Best Solution: {elite.solution}")
             print(f"Best fitness: {elite.fitness}")
+        if checks:
+            ids = [id(ind.solution) for ind in population]
+            id_counts = Counter(ids)
+            for obj_id, count in id_counts.items():
+                if count > 1:
+                    raise ValueError(f"Duplicate solution found. Multiple individuals have the same solution ID")
 
         # Apply genetic operations to generate the new population
         population = genetic_operations(population, elite, **args)
@@ -176,7 +188,6 @@ def genetic_algorithm(
         # Update the elite individual
         elite_fit = elite.fitness
         elite = deepcopy(get_best(population+[elite], lambda x: x.fitness, args))
-
         # Collect statistics for plotting
         fitness_values = list(map(lambda x: x.fitness, population))
         fit_means.append(np.mean(fitness_values))

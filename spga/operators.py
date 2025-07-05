@@ -166,7 +166,9 @@ def create_genetic_operations(
                 parent1 = new_population[i]
                 parent2 = new_population[i + 1] if i + 1 < pop_size else new_population[i]
                 
-                child1, child2 = crossover_func(parent1, parent2, **kwargs) 
+                child1, child2 = crossover_func(parent1, parent2, **kwargs)
+                child1.modified = True
+                child2.modified = True 
                 new_population[i] = child1
                 if i + 1 < pop_size:
                     new_population[i + 1] = child2
@@ -175,6 +177,7 @@ def create_genetic_operations(
         for i in range(len(new_population)):
             if random.random() < kwargs.get('mutation_probability', 0.1):
                 child = mutation_func(new_population[i], **kwargs)
+                child.modified = True
                 new_population[i] = child
         
         return new_population[:pop_size]  # Ensure correct population size
