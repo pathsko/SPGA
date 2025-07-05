@@ -201,7 +201,7 @@ def genetic_algorithm(
         plot_with_std(range(1, iteration + 1), fit_means, fit_stds, elite_fitnesses, log=args.get('log', False))
 
     # Return the final population, best solution, and best fitness value
-        return GeneticAlgorithmResult(
+    return GeneticAlgorithmResult(
         population=population,
         best_solution=elite.solution,
         best_fitness=elite.fitness
